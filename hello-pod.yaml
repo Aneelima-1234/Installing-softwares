@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-pod
+  labels: 
+    app: nop
+    env: dev
+    purpose: mean
+spec:
+  containers:
+    - name: nop
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+          protocol: TCP
+      resources:
+        limits:
+          cpu: "500m"
+          memory: "256Mi" 
+        requests:
+          cpu: "250m"
+          memory: "64Mi"     

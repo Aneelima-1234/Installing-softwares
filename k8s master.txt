@@ -1,0 +1,473 @@
+indows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\91912> ssh -i C:\Users\91912\Downloads\kube_id.pem azureuser@40.71.187.145
+The authenticity of host '40.71.187.145 (40.71.187.145)' can't be established.
+ED25519 key fingerprint is SHA256:IKhfh4ogiaYzpQacQoabkvjdIQZDuZXfTlhas1ftJII.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '40.71.187.145' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 6.5.0-1021-azure x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Jun 12 06:23:40 UTC 2024
+
+  System load:  0.09              Processes:             127
+  Usage of /:   5.1% of 28.89GB   Users logged in:       0
+  Memory usage: 7%                IPv4 address for eth0: 10.0.0.4
+  Swap usage:   0%
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+azureuser@duck-2:~$ curl -fsSL https://get.docker.com -o install-docker.sh
+azureuser@duck-2:~$ sh install-docker.sh
+# Executing docker install script, commit: 6d9743e9656cc56f699a64800b098d5ea5a60020
++ sudo -E sh -c apt-get update -qq >/dev/null
++ sudo -E sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y -qq apt-transport-https ca-certificates curl >/dev/null
++ sudo -E sh -c install -m 0755 -d /etc/apt/keyrings
++ sudo -E sh -c curl -fsSL "https://download.docker.com/linux/ubuntu/gpg" -o /etc/apt/keyrings/docker.asc
++ sudo -E sh -c chmod a+r /etc/apt/keyrings/docker.asc
++ sudo -E sh -c echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu jammy stable" > /etc/apt/sources.list.d/docker.list
++ sudo -E sh -c apt-get update -qq >/dev/null
++ sudo -E sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y -qq docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras docker-buildx-plugin >/dev/null
++ sudo -E sh -c docker version
+Client: Docker Engine - Community
+ Version:           26.1.4
+ API version:       1.45
+ Go version:        go1.21.11
+ Git commit:        5650f9b
+ Built:             Wed Jun  5 11:28:57 2024
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          26.1.4
+  API version:      1.45 (minimum version 1.24)
+  Go version:       go1.21.11
+  Git commit:       de5c9cf
+  Built:            Wed Jun  5 11:28:57 2024
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.6.33
+  GitCommit:        d2d58213f83a351ca8f528a95fbd145f5654e957
+ runc:
+  Version:          1.1.12
+  GitCommit:        v1.1.12-0-g51d5e94
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+
+================================================================================
+
+To run Docker as a non-privileged user, consider setting up the
+Docker daemon in rootless mode for your user:
+
+    dockerd-rootless-setuptool.sh install
+
+Visit https://docs.docker.com/go/rootless/ to learn about rootless mode.
+
+
+To run the Docker daemon as a fully privileged service, but granting non-root
+users access, refer to https://docs.docker.com/go/daemon-access/
+
+WARNING: Access to the remote API on a privileged Docker daemon is equivalent
+         to root access on the host. Refer to the 'Docker daemon attack surface'
+         documentation for details: https://docs.docker.com/go/attack-surface/
+
+================================================================================
+
+azureuser@duck-2:~$  sudo usermod -aG docker azureuser
+azureuser@duck-2:~$ exit
+logout
+Connection to 40.71.187.145 closed.
+PS C:\Users\91912> ssh -i C:\Users\91912\Downloads\kube_id.pem azureuser@40.71.187.145
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 6.5.0-1021-azure x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Jun 12 06:25:26 UTC 2024
+
+  System load:  0.55              Processes:             119
+  Usage of /:   7.6% of 28.89GB   Users logged in:       0
+  Memory usage: 9%                IPv4 address for eth0: 10.0.0.4
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+43 updates can be applied immediately.
+31 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Wed Jun 12 06:23:42 2024 from 183.82.2.131
+azureuser@duck-2:~$ docker info
+Client: Docker Engine - Community
+ Version:    26.1.4
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.14.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.27.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+ Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
+ Images: 0
+ Server Version: 26.1.4
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: false
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: d2d58213f83a351ca8f528a95fbd145f5654e957
+ runc version: v1.1.12-0-g51d5e94
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.5.0-1021-azure
+ Operating System: Ubuntu 22.04.4 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 2
+ Total Memory: 3.762GiB
+ Name: duck-2
+ ID: cab65958-0205-4ac3-95e4-e38c54c9c220
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+azureuser@duck-2:~$ sudo apt-get update
+# apt-transport-https may be a dummy package; if so, you can skip that package
+sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+Hit:1 http://azure.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:2 http://azure.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:3 http://azure.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Hit:4 http://azure.archive.ubuntu.com/ubuntu jammy-security InRelease
+Hit:5 https://download.docker.com/linux/ubuntu jammy InRelease
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ca-certificates is already the newest version (20230311ubuntu0.22.04.1).
+curl is already the newest version (7.81.0-1ubuntu1.16).
+gpg is already the newest version (2.2.27-3ubuntu2.1).
+gpg set to manually installed.
+apt-transport-https is already the newest version (2.4.12).
+0 upgraded, 0 newly installed, 0 to remove and 35 not upgraded.
+azureuser@duck-2:~$ curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+azureuser@duck-2:~$ echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /
+azureuser@duck-2:~$ sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+Hit:1 http://azure.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:2 http://azure.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:3 http://azure.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Hit:4 http://azure.archive.ubuntu.com/ubuntu jammy-security InRelease
+Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  InRelease [1186 B]
+Hit:6 https://download.docker.com/linux/ubuntu jammy InRelease
+Get:7 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  Packages [5226 B]
+Fetched 6412 B in 1s (12.5 kB/s)
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  conntrack cri-tools ebtables kubernetes-cni socat
+The following NEW packages will be installed:
+  conntrack cri-tools ebtables kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 8 newly installed, 0 to remove and 35 not upgraded.
+Need to get 93.9 MB of archives.
+After this operation, 343 MB of additional disk space will be used.
+Get:1 http://azure.archive.ubuntu.com/ubuntu jammy/main amd64 conntrack amd64 1:1.4.6-2build2 [33.5 kB]
+Get:2 http://azure.archive.ubuntu.com/ubuntu jammy/main amd64 ebtables amd64 2.0.11-4build2 [84.9 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu jammy/main amd64 socat amd64 1.7.4.1-3ubuntu4 [349 kB]
+Get:4 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  cri-tools 1.30.0-1.1 [21.3 MB]
+Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubeadm 1.30.2-1.1 [10.4 MB]
+Get:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubectl 1.30.2-1.1 [10.8 MB]
+Get:7 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubernetes-cni 1.4.0-1.1 [32.9 MB]
+Get:8 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubelet 1.30.2-1.1 [18.1 MB]
+Fetched 93.9 MB in 1s (120 MB/s)
+Selecting previously unselected package conntrack.
+(Reading database ... 62335 files and directories currently installed.)
+Preparing to unpack .../0-conntrack_1%3a1.4.6-2build2_amd64.deb ...
+Unpacking conntrack (1:1.4.6-2build2) ...
+Selecting previously unselected package cri-tools.
+Preparing to unpack .../1-cri-tools_1.30.0-1.1_amd64.deb ...
+Unpacking cri-tools (1.30.0-1.1) ...
+Selecting previously unselected package ebtables.
+Preparing to unpack .../2-ebtables_2.0.11-4build2_amd64.deb ...
+Unpacking ebtables (2.0.11-4build2) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../3-kubeadm_1.30.2-1.1_amd64.deb ...
+Unpacking kubeadm (1.30.2-1.1) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../4-kubectl_1.30.2-1.1_amd64.deb ...
+Unpacking kubectl (1.30.2-1.1) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../5-kubernetes-cni_1.4.0-1.1_amd64.deb ...
+Unpacking kubernetes-cni (1.4.0-1.1) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../6-socat_1.7.4.1-3ubuntu4_amd64.deb ...
+Unpacking socat (1.7.4.1-3ubuntu4) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../7-kubelet_1.30.2-1.1_amd64.deb ...
+Unpacking kubelet (1.30.2-1.1) ...
+Setting up conntrack (1:1.4.6-2build2) ...
+Setting up kubectl (1.30.2-1.1) ...
+Setting up ebtables (2.0.11-4build2) ...
+Setting up socat (1.7.4.1-3ubuntu4) ...
+Setting up cri-tools (1.30.0-1.1) ...
+Setting up kubernetes-cni (1.4.0-1.1) ...
+Setting up kubeadm (1.30.2-1.1) ...
+Setting up kubelet (1.30.2-1.1) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+kubelet set on hold.
+kubeadm set on hold.
+kubectl set on hold.
+azureuser@duck-2:~$ wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.14/cri-dockerd_0.3.14.3-0.ubuntu-jammy_amd64.deb
+--2024-06-12 06:32:36--  https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.14/cri-dockerd_0.3.14.3-0.ubuntu-jammy_amd64.deb
+Resolving github.com (github.com)... 140.82.112.3
+Connecting to github.com (github.com)|140.82.112.3|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://objects.githubusercontent.com/github-production-release-asset-2e65be/318491505/823b1e10-c2c7-4e5c-860f-0131da05995f?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20240612%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240612T063236Z&X-Amz-Expires=300&X-Amz-Signature=a853e7b03d4c5130c4f27f33171459ad90278251ce5b1250d0bba55f987d1656&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=318491505&response-content-disposition=attachment%3B%20filename%3Dcri-dockerd_0.3.14.3-0.ubuntu-jammy_amd64.deb&response-content-type=application%2Foctet-stream [following]
+--2024-06-12 06:32:36--  https://objects.githubusercontent.com/github-production-release-asset-2e65be/318491505/823b1e10-c2c7-4e5c-860f-0131da05995f?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20240612%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240612T063236Z&X-Amz-Expires=300&X-Amz-Signature=a853e7b03d4c5130c4f27f33171459ad90278251ce5b1250d0bba55f987d1656&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=318491505&response-content-disposition=attachment%3B%20filename%3Dcri-dockerd_0.3.14.3-0.ubuntu-jammy_amd64.deb&response-content-type=application%2Foctet-stream
+Resolving objects.githubusercontent.com (objects.githubusercontent.com)... 185.199.109.133, 185.199.110.133, 185.199.111.133, ...
+Connecting to objects.githubusercontent.com (objects.githubusercontent.com)|185.199.109.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 11108826 (11M) [application/octet-stream]
+Saving to: ‘cri-dockerd_0.3.14.3-0.ubuntu-jammy_amd64.deb’
+
+cri-dockerd_0.3.14.3-0.ubuntu 100%[=================================================>]  10.59M  --.-KB/s    in 0.03s
+
+2024-06-12 06:32:36 (349 MB/s) - ‘cri-dockerd_0.3.14.3-0.ubuntu-jammy_amd64.deb’ saved [11108826/11108826]
+
+azureuser@duck-2:~$                                                                                                     sudo dpkg -i cri-dockerd_0.3.14.3-0.ubuntu-jammy_amd64.deb
+Selecting previously unselected package cri-dockerd.
+(Reading database ... 62454 files and directories currently installed.)
+Preparing to unpack cri-dockerd_0.3.14.3-0.ubuntu-jammy_amd64.deb ...
+Unpacking cri-dockerd (0.3.14~3-0~ubuntu-jammy) ...
+Setting up cri-dockerd (0.3.14~3-0~ubuntu-jammy) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/cri-docker.service → /lib/systemd/system/cri-docker.service.
+Created symlink /etc/systemd/system/sockets.target.wants/cri-docker.socket → /lib/systemd/system/cri-docker.socket.
+azureuser@duck-2:~$ kubeadm join 10.0.0.5:6443 --token wcvled.546oyd9y41kr44lo \
+        --discovery-token-ca-cert-hash sha256:c7a47778b878e77852501b803e42d41702e453d3e77d1cc9d7c3ec2c9d092609
+[preflight] Running pre-flight checks
+error execution phase preflight: [preflight] Some fatal errors occurred:
+        [ERROR IsPrivilegedUser]: user is not running as root
+[preflight] If you know what you are doing, you can make a check non-fatal with `--ignore-preflight-errors=...`
+To see the stack trace of this error execute with --v=5 or higher
+azureuser@duck-2:~$ sudo -i
+root@duck-2:~# kubeadm join 10.0.0.5:6443 --token wcvled.546oyd9y41kr44lo \
+        --discovery-token-ca-cert-hash sha256:c7a47778b878e77852501b803e42d41702e453d3e77d1cc9d7c3ec2c9d092609
+Found multiple CRI endpoints on the host. Please define which one do you wish to use by setting the 'criSocket' field in the kubeadm configuration file: unix:///var/run/containerd/containerd.sock, unix:///var/run/cri-dockerd.sock
+To see the stack trace of this error execute with --v=5 or higher
+root@duck-2:~# kubeadm join 10.0.0.5:6443 --token wcvled.546oyd9y41kr44lo \
+        --discovery-token-ca-cert-hash sha256:c7a47778b878e77852501b803e42d41702e453d3e77d1cc9d7c3ec2c9d092609  --cri-socket unix:///var/run/cri-dockerd.sock
+[preflight] Running pre-flight checks
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Starting the kubelet
+[kubelet-check] Waiting for a healthy kubelet. This can take up to 4m0s
+[kubelet-check] The kubelet is healthy after 501.32272ms
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+
+root@duck-2:~# Connection to 40.71.187.145 closed by remote host.
+Connection to 40.71.187.145 closed.
+PS C:\Users\91912> ssh -i C:\Users\91912\Downloads\kube_id.pem azureuser@40.71.187.145
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 6.5.0-1021-azure x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Jun 12 07:26:25 UTC 2024
+
+  System load:  0.32               Processes:             152
+  Usage of /:   10.1% of 28.89GB   Users logged in:       0
+  Memory usage: 17%                IPv4 address for eth0: 10.0.0.4
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+43 updates can be applied immediately.
+31 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Wed Jun 12 06:25:27 2024 from 183.82.2.131
+azureuser@duck-2:~$ kubectl --version
+error: unknown flag: --version
+See 'kubectl --help' for usage.
+azureuser@duck-2:~$ kubectl version
+Client Version: v1.30.2
+Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+azureuser@duck-2:~$ docker version
+Client: Docker Engine - Community
+ Version:           26.1.4
+ API version:       1.45
+ Go version:        go1.21.11
+ Git commit:        5650f9b
+ Built:             Wed Jun  5 11:28:57 2024
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          26.1.4
+  API version:      1.45 (minimum version 1.24)
+  Go version:       go1.21.11
+  Git commit:       de5c9cf
+  Built:            Wed Jun  5 11:28:57 2024
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.6.33
+  GitCommit:        d2d58213f83a351ca8f528a95fbd145f5654e957
+ runc:
+  Version:          1.1.12
+  GitCommit:        v1.1.12-0-g51d5e94
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+azureuser@duck-2:~$ client_loop: send disconnect: Connection reset
+PS C:\Users\91912> ssh -i C:\Users\91912\Downloads\kube_id.pem azureuser@40.71.187.145
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 6.5.0-1021-azure x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Jun 12 09:21:37 UTC 2024
+
+  System load:  0.01               Processes:             146
+  Usage of /:   10.1% of 28.89GB   Users logged in:       0
+  Memory usage: 18%                IPv4 address for eth0: 10.0.0.4
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+43 updates can be applied immediately.
+31 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Wed Jun 12 07:26:27 2024 from 183.82.2.131
+azureuser@duck-2:~$ sudo -i
+root@duck-2:~# kubeadm join 10.0.0.5:6443 --token wcvled.546oyd9y41kr44lo \
+        --discovery-token-ca-cert-hash sha256:c7a47778b878e77852501b803e42d41702e453d3e77d1cc9d7c3ec2c9d092609  --cri-socket unix:///var/run/cri-dockerd.sock
+[preflight] Running pre-flight checks
+error execution phase preflight: [preflight] Some fatal errors occurred:
+        [ERROR FileAvailable--etc-kubernetes-kubelet.conf]: /etc/kubernetes/kubelet.conf already exists
+        [ERROR Port-10250]: Port 10250 is in use
+        [ERROR FileAvailable--etc-kubernetes-pki-ca.crt]: /etc/kubernetes/pki/ca.crt already exists
+[preflight] If you know what you are doing, you can make a check non-fatal with `--ignore-preflight-errors=...`
+To see the stack trace of this error execute with --v=5 or higher
+root@duck-2:~# kubectl get nodes
+E0612 09:24:32.692112   19871 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0612 09:24:32.692432   19871 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0612 09:24:32.693737   19871 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0612 09:24:32.694042   19871 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0612 09:24:32.695339   19871 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@duck-2:~# Connection to 40.71.187.145 closed by remote host.
+Connection to 40.71.187.145 closed.
+PS C:\Users\91912>
+
+
+
+
+
+
+
+

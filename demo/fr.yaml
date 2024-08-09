@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: front-rs
+  labels:
+    app: front
+    topic: resources
+spec:
+  minReadySeconds: 5
+  replicas: 2
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata:
+      labels:
+        app: front
+        topic: resources
+    spec:
+      containers:
+        - name: front-cont
+          image: nginx
+          ports:
+            - containerPort: 80
