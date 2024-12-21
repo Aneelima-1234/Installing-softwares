@@ -8,4 +8,4 @@ export PATH=$M2_HOME/bin:$PATH
 # to save the file press 'ctrl+o' and 'enter'
 sudo chmod +x /etc/profile.d/maven.sh
 source /etc/profile.d/maven.sh
-maven -version
+mvn -version
